@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Física</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Bem-vindo à página de Física</h1>
+    <p>Conteúdo sobre Física aqui.</p>
+    <div style="width: 500px; height: 500px">
+        <canvas id="graficoFisica" style="width: 500px; height: 500px"></canvas>
+    </div>
+    <script>
+        const ctxFisica = document.getElementById('graficoFisica');
+
+        // Dados originais
+        const labels = ['An. Dimensional', 'Eletricidade', 'Eletromag', 'Física Morderna', 'Mecanica', 'Ondulatoria', 'Optica', 'Termologia'];
+        const data = [3, 61, 11, 5, 87, 48, 22, 45];
+
+        // Combinar rótulos e dados, ordenar e separar novamente
+        const combined = labels.map((label, index) => ({ label, data: data[index] }));
+        combined.sort((a, b) => b.data - a.data);
+
+        const sortedLabels = combined.map(item => item.label);
+        const sortedData = combined.map(item => item.data);
+
+        const myChartFisica = new Chart(ctxFisica, {
+            type: 'bar',
+            data: {
+                labels: sortedLabels,
+                datasets: [{
+                    label: 'Questões por matéria',
+                    data: sortedData,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                    fill: false
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

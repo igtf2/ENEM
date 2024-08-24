@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Física</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Bem-vindo à página de Matematica</h1>
+    <p>Conteúdo sobre Física aqui.</p>
+    <div style="width: 500px; height: 500px">
+        <canvas id="graficoFisica" style="width: 500px; height: 500px"></canvas>
+    </div>
+    <script>
+        const ctxFisica = document.getElementById('graficoFisica');
+        const myChartFisica = new Chart(ctxFisica, {
+            type: 'line',
+            data: {
+                labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
+                datasets: [{
+                    label: 'Notas de Física',
+                    data: [65, 59, 80, 81, 56, 55],
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                    fill: false
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
