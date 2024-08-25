@@ -10,14 +10,19 @@
 <body>
     <h1>Bem-vindo à página de Física</h1>
     <p>Conteúdo sobre Física aqui.</p>
+    
+    <!-- Botão para voltar para ENEM.html -->
+    <button onclick="window.location.href='ENEM.html'">Voltar</button>
+
     <div style="width: 500px; height: 500px">
         <canvas id="graficoFisica" style="width: 500px; height: 500px"></canvas>
     </div>
+
     <script>
         const ctxFisica = document.getElementById('graficoFisica');
 
         // Dados originais
-        const labels = ['An. Dimensional', 'Eletricidade', 'Eletromag', 'Física Morderna', 'Mecanica', 'Ondulatoria', 'Optica', 'Termologia'];
+        const labels = ['An. Dimensional', 'Eletricidade', 'Eletromag', 'Física Moderna', 'Mecanica', 'Ondulatoria', 'Optica', 'Termologia'];
         const data = [3, 61, 11, 5, 87, 48, 22, 45];
 
         // Combinar rótulos e dados, ordenar e separar novamente
@@ -43,6 +48,14 @@
                 scales: {
                     y: {
                         beginAtZero: true
+                    }
+                },
+                onClick: (event, elements) => {
+                    if (elements.length > 0) {
+                        const index = elements[0].index;
+                        const label = sortedLabels[index];
+                        // Redireciona para uma página com o nome da barra seguido de ".html"
+                        window.location.href = `${label}.html`;
                     }
                 }
             }

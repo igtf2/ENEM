@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Química Orgânica</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Bem-vindo à página de Química Orgânica</h1>
+    <p>Conteúdo sobre Química Orgânica aqui.</p>
+
+    <button onclick="window.location.href='quimica.html'">Voltar</button>
+
+    <div style="width: 500px; height: 500px">
+        <canvas id="graficoQuimicaOrganica" style="width: 500px; height: 500px"></canvas>
+    </div>
+    <script>
+        const ctxQuimicaOrganica = document.getElementById('graficoQuimicaOrganica');
+
+        // Novos valores fornecidos
+        const labels = [
+            'Reações Orgânicas',
+            'Propriedades',
+            'Polímeros',
+            'Hidrocarbonetos',
+            'Isomeria',
+            'Cadeias Carbônicas',
+            'Funções Orgânicas'
+        ];
+        const data = [23, 14, 10, 9, 8, 8, 6];
+        const links = [
+            'https://app.repertorioenem.com.br/questions/list?search=1&field%5B%5D=9&subject%5B%5D=23&topic%5B%5D=563&institution%5B%5D=1&institution%5B%5D=157&institution%5B%5D=3&institution%5B%5D=2&year%5B%5D=2024&year%5B%5D=2023&year%5B%5D=2022&year%5B%5D=2021&year%5B%5D=2020&year%5B%5D=2019&year%5B%5D=2018&year%5B%5D=2017&year%5B%5D=2016&year%5B%5D=2015&text=&pages=10&order_by=1',
+            'https://app.repertorioenem.com.br/questions/list?search=1&field%5B%5D=9&subject%5B%5D=23&topic%5B%5D=563&institution%5B%5D=1&institution%5B%5D=157&institution%5B%5D=3&institution%5B%5D=2&year%5B%5D=2024&year%5B%5D=2023&year%5B%5D=2022&year%5B%5D=2021&year%5B%5D=2020&year%5B%5D=2019&year%5B%5D=2018&year%5B%5D=2017&year%5B%5D=2016&year%5B%5D=2015&text=&pages=10&order_by=1',
+            'https://app.repertorioenem.com.br/questions/list?search=1&field%5B%5D=9&subject%5B%5D=23&topic%5B%5D=305&institution%5B%5D=1&institution%5B%5D=157&institution%5B%5D=3&institution%5B%5D=2&year%5B%5D=2024&year%5B%5D=2023&year%5B%5D=2022&year%5B%5D=2021&year%5B%5D=2020&year%5B%5D=2019&year%5B%5D=2018&year%5B%5D=2017&year%5B%5D=2016&year%5B%5D=2015&text=&pages=10&order_by=1',
+            'https://app.repertorioenem.com.br/questions/list?search=1&field%5B%5D=9&subject%5B%5D=23&topic%5B%5D=313&institution%5B%5D=1&institution%5B%5D=157&institution%5B%5D=3&institution%5B%5D=2&year%5B%5D=2024&year%5B%5D=2023&year%5B%5D=2022&year%5B%5D=2021&year%5B%5D=2020&year%5B%5D=2019&year%5B%5D=2018&year%5B%5D=2017&year%5B%5D=2016&year%5B%5D=2015&text=&pages=10&order_by=1',
+            'https://app.repertorioenem.com.br/questions/list?search=1&field%5B%5D=9&subject%5B%5D=23&topic%5B%5D=47&institution%5B%5D=1&institution%5B%5D=157&institution%5B%5D=3&institution%5B%5D=2&year%5B%5D=2024&year%5B%5D=2023&year%5B%5D=2022&year%5B%5D=2021&year%5B%5D=2020&year%5B%5D=2019&year%5B%5D=2018&year%5B%5D=2017&year%5B%5D=2016&year%5B%5D=2015&text=&pages=10&order_by=1',
+            'https://app.repertorioenem.com.br/questions/list?search=1&field%5B%5D=9&subject%5B%5D=23&topic%5B%5D=209&institution%5B%5D=1&institution%5B%5D=157&institution%5B%5D=3&institution%5B%5D=2&year%5B%5D=2024&year%5B%5D=2023&year%5B%5D=2022&year%5B%5D=2021&year%5B%5D=2020&year%5B%5D=2019&year%5B%5D=2018&year%5B%5D=2017&year%5B%5D=2016&year%5B%5D=2015&text=&pages=10&order_by=1',
+            'https://app.repertorioenem.com.br/questions/list?search=1&field%5B%5D=9&subject%5B%5D=23&topic%5B%5D=43&institution%5B%5D=1&institution%5B%5D=157&institution%5B%5D=3&institution%5B%5D=2&year%5B%5D=2024&year%5B%5D=2023&year%5B%5D=2022&year%5B%5D=2021&year%5B%5D=2020&year%5B%5D=2019&year%5B%5D=2018&year%5B%5D=2017&year%5B%5D=2016&year%5B%5D=2015&text=&pages=10&order_by=1'
+        ];
+
+        // Configurando o gráfico com os valores fornecidos
+        const myChartQuimicaOrganica = new Chart(ctxQuimicaOrganica, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Questões por matéria',
+                    data: data,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                    fill: false
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                onClick: (event, elements) => {
+                    if (elements.length > 0) {
+                        const index = elements[0].index;
+                        window.open(links[index], '_blank');
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
