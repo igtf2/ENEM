@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráfico Dinâmico</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <button onclick="history.back()">Voltar</button>
+    <div style="width: 500px; height: 500px">
+        <canvas id="myChart"></canvas>
+    </div>
+    <script>
+        function updateChart(labels, data, links) {
+            // Combine labels, data, and links into a single array for sorting
+            const combinedData = labels.map((label, index) => {
+                return {
+                    label: label,
+                    value: data[index],
+                    link: links[index]
+                };
+            });
+
+            // Sort the array in descending order based on the value
+            combinedData.sort((a, b) => b.value - a.value);
+
+            // Separate the sorted array back into labels, data, and links
+            const sortedLabels = combinedData.map(item => item.label);
+            const sortedData = combinedData.map(item => item.value);
+            const sortedLinks = combinedData.map(item => item.link);
+
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: sortedLabels,
+                    datasets: [{
+                        label: 'Valores',
+                        data: sortedData,
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    onClick: (event, elements) => {
+                        if (elements.length > 0) {
+                            const index = elements[0].index;
+                            window.open(sortedLinks[index], '_blank');
+                        }
+                    }
+                }
+            });
+        }
+
+        // Novos valores fornecidos
+        const labels = [
+            'Classificação dos Seres Vivos', 
+            'Evidências e Processos Evolutivos', 
+            'Teorias Evolutivas'
+        ];
+        const data = [2, 8, 6];
+        const links = [
+            'https://app.repertorioenem.com.br/questions/list?search=1&field%5B%5D=8&subject%5B%5D=40&topic%5B%5D=882&institution%5B%5D=1&institution%5B%5D=157&institution%5B%5D=3&institution%5B%5D=2&year%5B%5D=2024&year%5B%5D=2023&year%5B%5D=2022&year%5B%5D=2021&year%5B%5D=2020&year%5B%5D=2019&year%5B%5D=2018&year%5B%5D=2017&year%5B%5D=2016&year%5B%5D=2015&text=&pages=10&order_by=1',
+            'https://app.repertorioenem.com.br/questions/list?search=1&field%5B%5D=8&subject%5B%5D=40&topic%5B%5D=69&institution%5B%5D=1&institution%5B%5D=157&institution%5B%5D=3&institution%5B%5D=2&year%5B%5D=2024&year%5B%5D=2023&year%5B%5D=2022&year%5B%5D=2021&year%5B%5D=2020&year%5B%5D=2019&year%5B%5D=2018&year%5B%5D=2017&year%5B%5D=2016&year%5B%5D=2015&text=&pages=10&order_by=1',
+            'https://app.repertorioenem.com.br/questions/list?search=1&field%5B%5D=8&subject%5B%5D=40&topic%5B%5D=1022&institution%5B%5D=1&institution%5B%5D=157&institution%5B%5D=3&institution%5B%5D=2&year%5B%5D=2024&year%5B%5D=2023&year%5B%5D=2022&year%5B%5D=2021&year%5B%5D=2020&year%5B%5D=2019&year%5B%5D=2018&year%5B%5D=2017&year%5B%5D=2016&year%5B%5D=2015&text=&pages=10&order_by=1'
+        ];
+
+        // Atualizar o gráfico com os novos valores
+        updateChart(labels, data, links);
+    </script>
+</body>
+</html>

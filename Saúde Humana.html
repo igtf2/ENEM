@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráfico Dinâmico</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <button onclick="history.back()">Voltar</button>
+    <div style="width: 800px; height: 800px">
+        <canvas id="myChart"></canvas>
+    </div>
+    <script>
+        function updateChart(labels, data, links) {
+            // Combine labels, data, and links into a single array for sorting
+            const combinedData = labels.map((label, index) => {
+                return {
+                    label: label,
+                    value: data[index],
+                    link: links[index]
+                };
+            });
+
+            // Sort the array in descending order based on the value
+            combinedData.sort((a, b) => b.value - a.value);
+
+            // Separate the sorted array back into labels, data, and links
+            const sortedLabels = combinedData.map(item => item.label);
+            const sortedData = combinedData.map(item => item.value);
+            const sortedLinks = combinedData.map(item => item.link);
+
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: sortedLabels,
+                    datasets: [{
+                        label: 'Valores',
+                        data: sortedData,
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    onClick: (event, elements) => {
+                        if (elements.length > 0) {
+                            const index = elements[0].index;
+                            window.open(sortedLinks[index], '_blank');
+                        }
+                    }
+                }
+            });
+        }
+
+        // Novos valores fornecidos
+        const labels = [
+            'Doenças Causadas por Protozoários',
+            'Vacinas e Vetores',
+            'Bacterioses',
+            'Viroses',
+            'Parasitas e Verminoses',
+            'Doenças e Problemas Crônicos Gerais',
+            'Métodos Contraceptivos'
+        ];
+        const data = [5, 4, 3, 3, 2, 1, 1];
+        const links = [
+            'https://app.repertorioenem.com.br/questions/list?search=1&field%5B%5D=8&subject%5B%5D=284&topic%5B%5D=1044&institution%5B%5D=1&institution%5B%5D=157&institution%5B%5D=3&institution%5B%5D=2&year%5B%5D=2024&year%5B%5D=2023&year%5B%5D=2022&year%5B%5D=2021&year%5B%5D=2020&year%5B%5D=2019&year%5B%5D=2018&year%5B%5D=2017&year%5B%5D=2016&year%5B%5D=2015&text=&pages=10&order_by=1',
+            'https://app.repertorioenem.com.br/questions/list?search=1&field%5B%5D=8&subject%5B%5D=284&topic%5B%5D=1046&institution%5B%5D=1&institution%5B%5D=157&institution%5B%5D=3&institution%5B%5D=2&year%5B%5D=2024&year%5B%5D=2023&year%5B%5D=2022&year%5B%5D=2021&year%5B%5D=2020&year%5B%5D=2019&year%5B%5D=2018&year%5B%5D=2017&year%5B%5D=2016&year%5B%5D=2015&text=&pages=10&order_by=1',
+            'https://app.repertorioenem.com.br/questions/list?search=1&field%5B%5D=8&subject%5B%5D=284&topic%5B%5D=1045&institution%5B%5D=1&institution%5B%5D=157&institution%5B%5D=3&institution%5B%5D=2&year%5B%5D=2024&year%5B%5D=2023&year%5B%5D=2022&year%5B%5D=2021&year%5B%5D=2020&year%5B%5D=2019&year%5B%5D=2018&year%5B%5D=2017&year%5B%5D=2016&year%5B%5D=2015&text=&pages=10&order_by=1',
+            'https://app.repertorioenem.com.br/questions/list?search=1&field%5B%5D=8&subject%5B%5D=284&topic%5B%5D=1043&institution%5B%5D=1&institution%5B%5D=157&institution%5B%5D=3&institution%5B%5D=2&year%5B%5D=2024&year%5B%5D=2023&year%5B%5D=2022&year%5B%5D=2021&year%5B%5D=2020&year%5B%5D=2019&year%5B%5D=2018&year%5B%5D=2017&year%5B%5D=2016&year%5B%5D=2015&text=&pages=10&order_by=1',
+            'https://app.repertorioenem.com.br/questions/list?search=1&field%5B%5D=8&subject%5B%5D=284&topic%5B%5D=1048&institution%5B%5D=1&institution%5B%5D=157&institution%5B%5D=3&institution%5B%5D=2&year%5B%5D=2024&year%5B%5D=2023&year%5B%5D=2022&year%5B%5D=2021&year%5B%5D=2020&year%5B%5D=2019&year%5B%5D=2018&year%5B%5D=2017&year%5B%5D=2016&year%5B%5D=2015&text=&pages=10&order_by=1',
+            'https://app.repertorioenem.com.br/questions/list?search=1&field%5B%5D=8&subject%5B%5D=284&topic%5B%5D=1065&institution%5B%5D=1&institution%5B%5D=157&institution%5B%5D=3&institution%5B%5D=2&year%5B%5D=2024&year%5B%5D=2023&year%5B%5D=2022&year%5B%5D=2021&year%5B%5D=2020&year%5B%5D=2019&year%5B%5D=2018&year%5B%5D=2017&year%5B%5D=2016&year%5B%5D=2015&text=&pages=10&order_by=1',
+            'https://app.repertorioenem.com.br/questions/list?search=1&field%5B%5D=8&subject%5B%5D=284&topic%5B%5D=1157&institution%5B%5D=1&institution%5B%5D=157&institution%5B%5D=3&institution%5B%5D=2&year%5B%5D=2024&year%5B%5D=2023&year%5B%5D=2022&year%5B%5D=2021&year%5B%5D=2020&year%5B%5D=2019&year%5B%5D=2018&year%5B%5D=2017&year%5B%5D=2016&year%5B%5D=2015&text=&pages=10&order_by=1'
+        ];
+
+        // Atualizar o gráfico com os novos valores
+        updateChart(labels, data, links);
+    </script>
+</body>
+</html>
