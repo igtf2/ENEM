@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ENEM - Página Inicial</title>
+    <title>Plataforma XXXXXXXX</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -22,182 +22,304 @@
         header {
             background-color: #0066cc;
             color: white;
-            padding: 20px;
+            padding: 1px;
             text-align: center;
         }
 
-        nav {
+        header .clicks {
             display: flex;
             justify-content: center;
-            background-color: #004a99;
-            padding: 10px;
+            gap: 35px;
         }
 
-        nav a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s;
+        #ranking, #matematica, #front {
+            display: inline-block;
+            transition: transform 0.5s ease, color 0.5s ease;
+            cursor: pointer;
         }
 
-        nav a:hover {
-            color: #ffcc00;
+        #front {
+            color: yellow;
         }
 
-        .hero {
-            background-image: url('imagem-de-destaque.jpg'); /* Substitua pela sua imagem */
-            background-size: cover;
-            color: rgb(0, 0, 0);
+        .container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            opacity: 1;
+            transform: translateY(-100%);
+        }
+
+        .intro {
             text-align: center;
-            padding: 100px 20px;
-        }
-
-        .hero h1 {
-            font-size: 2.5em;
-            margin: 0;
-            animation: slideIn 1s ease-in-out;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateY(-20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .hero p {
-            font-size: 1.2em;
-            margin: 10px 0 20px;
-            animation: fadeIn 1.5s ease-in-out;
-        }
-
-        .hero a {
-            background-color: #ffcc00;
-            color: #333;
-            padding: 10px 20px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: transform 0.3s;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .hero a:hover {
-            transform: scale(1.1);
-            background-color: #e6b800;
+            margin-bottom: 20px;
         }
 
         .cards {
             display: flex;
+            align-items: center;
             justify-content: space-around;
             padding: 20px;
         }
 
-        .card1 {
+        .card1, .card2, .card3 {
+            position: relative;
+            width: 25%;
+            height: 250px;
             background-color: white;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            padding: 20px;
+            padding: 0;
             text-align: center;
-            width: 30%;
+            overflow: hidden;
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .card2 {
-            background-color: white;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            padding: 20px;
-            text-align: center;
-            width: 30%;
-            transition: transform 0.3s, box-shadow 0.3s;
+        .card1 img, .card2 img, .card3 img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        .card3 {
-            background-color: white;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            padding: 20px;
-            text-align: center;
-            width: 30%;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .card img {
-            width: 100px;
-            height: 100px;
-            transition: transform 0.3s;
-        }
-
-        .card1:hover {
-            transform: translateY(-10px);
+        .card1:hover, .card2:hover, .card3:hover {
+            transform: scale(1.2);
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
             cursor: pointer;
         }
 
-        .card2:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            cursor: pointer;
+        .card1 .content, .card2 .content, .card3 .content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: white;
+            background: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: background 0.3s ease;
         }
 
-        .card3:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            cursor: pointer;
-        }
-
-        .card div {
+        .card1 .content h3, .card2 .content h3, .card3 .content h3 {
+            margin: 0;
             font-size: 1.5em;
-            margin: 15px 0;
+        }
+
+        .card1 .content p, .card2 .content p, .card3 .content p {
+            margin: 10px 0 0;
+            font-size: 1em;
+        }
+
+        .card1:hover .content, .card2:hover .content, .card3:hover .content {
+            background: rgba(0, 0, 0, 0.7); /* Fundo mais escuro ao hover */
         }
 
         footer {
-            background-color: #333;
-            color: white;
-            padding: 20px;
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
             text-align: center;
+            padding: 20px 0;
+        }
+
+    
+        .page.move-out {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+        .page.move-in {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .cardsM {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 20px;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Ranking de incidência de questões por matéria</h1>
+    <h1>Plataforma XXXXXXXX</h1>
+    <hr>
+    <div class="clicks">
+        <h5 id="ranking">RANKING</h5>
+        <h5 id="front">INÍCIO</h5>
+        <h5 id="matematica">MATEMÁTICA</h5>
+    </div>
 </header>
-
-<!--nav>
-    <a href="#">Início</a>
-    <a href="#">Física</a>
-    <a href="#">Biologia</a>
-    <a href="#">Química</a>
-</nav-->
-
-<div class="hero">
-    <h1>Prepare-se para o ENEM</h1>
+<div class="container">
+    <div class="page move-in" id="pageFront">
+        <div class="intro">
+            <h1>Conteúdo gratuito para os estudantes</h1>
+            <h3>Navegue pela plataforma para ter acesso a gráficos com incidência de questões por disciplina ou aulas gratuitas de matemática</h3>
+        </div>
+        <section class="cards">
+            <div class="card1">
+                <img src="graficco.png" alt="Novo Conteúdo">
+                <div>
+                    <h3>Novo Conteúdo</h3>
+                    <p>Este é o novo conteúdo exibido por padrão.</p>
+                </div>
+            </div>
+            <div class="card1">
+                <img src="mate.png" alt="Novo Conteúdo">
+                <div>
+                    <h3>Novo Conteúdo</h3>
+                    <p>Este é o novo conteúdo exibido por padrão.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="page" id="pageRanking">
+        <div class="intro">
+            <h1>Ranking de incidência de questões</h1>
+            <h3>Tenha acesso a um gráfico de ocorrência de matérias por disciplina totalmente gratuito</h3>
+        </div>
+        <section class="cards">
+            <div onClick="window.location.href='fisica.html'" class="card1">
+                <img src="fisica.png" alt="Imagem de Física">
+                <div class="content">
+                    <h3>Física</h3>
+                </div>
+            </div>
+            <div onClick="window.location.href='biologia.html'" class="card2">
+                <img src="bio.png" alt="Imagem de Biologia">
+                <div class="content">
+                    <h3>Biologia</h3>
+                </div>
+            </div>
+            <div onClick="window.location.href='quimica.html'" class="card3">
+                <img src="mão.png" alt="Imagem de Química">
+                <div class="content">
+                    <h3>Química</h3>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="page" id="pageMath">
+        <div class="intro">
+            <h1>Platafoma de Matemática</h1>
+            <h3>Aulas de matemática a nível ENEM totalmente gratuitas</h3>
+        </div>
+        <section class="cards">
+            <div onClick="window.location.href='matematica.html'" class="card1">
+                <img src="graficco.png" alt="Imagem de Gráfico">
+                <div class="content">
+                    <h3>Ranking de Mat</h3>
+                </div>
+            </div>
+            <div onClick="window.location.href=''" class="card2">
+                <img src="aula.png" alt="Imagem de Matemática">
+                <div class="content">
+                    <h3>Aulas de Matemática</h3>
+                </div>
+            </div>
+            <div onClick="window.location.href='quimica.html'" class="card3">
+                <img src="mat.png" alt="Imagem de Química">
+                <div class="content">
+                    <h3>Resolução de questões</h3>
+                </div>
+            </div>
+        </section>
+    </div>
 </div>
-
-<section class="cards">
-    <div onClick="window.location.href='fisica.html'" class="card1">
-        <h3>Física</h3>
-        <p>Explore recursos de Física.</p>
-    </div>
-    <div onClick="window.location.href='biologia.html'" class="card2">
-        <h3>Biologia</h3>
-        <p>Explore recursos de Biologia.</p>
-    </div>
-    <div onClick="window.location.href='quimica.html'" class="card3">
-        <h3>Química</h3>
-        <p>Explore recursos de Química.</p>
-    </div>
-</section>
-
+<hr>
 <footer>
     <p>&copy; Feito por Artur. Com muita IA. Muita.</p>
 </footer>
 
 <script>
-    // Scroll suave para âncoras
+    let inicio = true;
+    let matematica = true;
+    let ranking = true;
+
+    document.getElementById('front').style.scale = '1.3';
+
+    document.getElementById('ranking').addEventListener('click', function() {
+    ranking = true;
+    matematica = false;
+    inicio = false;
+    this.style.color = 'yellow';
+    this.style.scale = '1.3';
+
+    const currentContent = document.querySelector('.page.move-in');
+    const newContent = document.getElementById('pageRanking');
+    currentContent.classList.remove('move-in');
+    newContent.classList.remove('move-in');
+    newContent.classList.remove('move-out');
+    setTimeout(() => {
+        newContent.classList.add('move-in');
+    }, 500);
+
+    if (!inicio && !matematica) {
+        document.getElementById('front').style.color = 'white';
+        document.getElementById('front').style.scale = '1';
+        document.getElementById('matematica').style.color = 'white';
+        document.getElementById('matematica').style.scale = '1';
+    }
+});
+
+document.getElementById('front').addEventListener('click', function() {
+    inicio = true;
+    matematica = false;
+    ranking = false;
+    this.style.color = 'yellow';
+    this.style.scale = '1.3';
+
+    const currentContent = document.querySelector('.page.move-in');
+    const newContent = document.getElementById('pageFront');
+    currentContent.classList.remove('move-in');
+    newContent.classList.remove('move-in');
+    newContent.classList.remove('move-out');
+    setTimeout(() => {
+        newContent.classList.add('move-in');
+    }, 500);
+
+    if (!ranking && !matematica) {
+        document.getElementById('ranking').style.color = 'white';
+        document.getElementById('ranking').style.scale = '1';
+        document.getElementById('matematica').style.color = 'white';
+        document.getElementById('matematica').style.scale = '1';
+    }
+});
+
+document.getElementById('matematica').addEventListener('click', function() {
+    matematica = true;
+    inicio = false;
+    ranking = false;
+    this.style.color = 'yellow';
+    this.style.scale = '1.3';
+
+    const currentContent = document.querySelector('.page.move-in');
+    const newContent = document.getElementById('pageMath');
+    currentContent.classList.remove('move-in');
+    newContent.classList.remove('move-in');
+    newContent.classList.remove('move-out');
+    setTimeout(() => {
+        newContent.classList.add('move-in');
+    }, 500);
+
+    if (!ranking && !inicio) {
+        document.getElementById('ranking').style.color = 'white';
+        document.getElementById('ranking').style.scale = '1';
+        document.getElementById('front').style.color = 'white';
+        document.getElementById('front').style.scale = '1';
+    }
+});
 
 </script>
 
